@@ -2,15 +2,14 @@ import { Exclude, Expose } from 'class-transformer';
 import { FileType } from '../../files/domain/file';
 import { Role } from '../../roles/domain/role';
 import { Status } from '../../statuses/domain/status';
+import { Course } from 'src/courses/domain/course';
 import { ApiProperty } from '@nestjs/swagger';
-
-const idType = Number;
 
 export class User {
   @ApiProperty({
-    type: idType,
+    type: String,
   })
-  id: number | string;
+  id: string;
 
   @ApiProperty({
     type: String,
@@ -62,6 +61,11 @@ export class User {
     type: () => Status,
   })
   status?: Status;
+
+  @ApiProperty({
+    type: () => [Course],
+  })
+  courses?: Course[];
 
   @ApiProperty()
   createdAt: Date;

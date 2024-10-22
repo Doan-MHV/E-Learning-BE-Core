@@ -27,6 +27,8 @@ const infrastructureDatabaseModule = TypeOrmModule.forRootAsync({
   },
 });
 
+import { CoursesModule } from './courses/courses.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -58,6 +60,7 @@ const infrastructureDatabaseModule = TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
     }),
+    CoursesModule,
     UsersModule,
     FilesModule,
     AuthModule,

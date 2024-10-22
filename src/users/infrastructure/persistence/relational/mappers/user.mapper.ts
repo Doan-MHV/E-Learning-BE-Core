@@ -1,5 +1,6 @@
 import { FileEntity } from '../../../../../files/infrastructure/persistence/relational/entities/file.entity';
 import { FileMapper } from '../../../../../files/infrastructure/persistence/relational/mappers/file.mapper';
+import { CourseMapper } from 'src/courses/infrastructure/persistence/relational/mappers/course.mapper';
 import { RoleEntity } from '../../../../../roles/infrastructure/persistence/relational/entities/role.entity';
 import { StatusEntity } from '../../../../../statuses/infrastructure/persistence/relational/entities/status.entity';
 import { User } from '../../../../domain/user';
@@ -20,6 +21,10 @@ export class UserMapper {
     }
     domainEntity.role = raw.role;
     domainEntity.status = raw.status;
+    if (raw.courses) {
+      domainEntity.courses =
+        raw.courses?.map((course) => CourseMapper.toDomain(course)) || [];
+    }
     domainEntity.createdAt = raw.createdAt;
     domainEntity.updatedAt = raw.updatedAt;
     domainEntity.deletedAt = raw.deletedAt;
